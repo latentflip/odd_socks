@@ -1,0 +1,11 @@
+{
+  "app": "System",
+  "commands" : {
+    "volumeUp" : "~/remotes/system/volume-up", 
+    "volumeDown" : "~/remotes/system/volume-down"
+  },
+  "layout" : {
+    "volumeUp" : "icon-volume-up",
+    "volumeDown" : "icon-volume-down"
+  }
+}

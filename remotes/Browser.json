@@ -1,0 +1,6 @@
+{
+  "app": "browser",
+  "layout" : {
+    "next" : "icon-forward"
+  }
+}

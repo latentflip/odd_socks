@@ -1,0 +1,12 @@
+{
+  "app": "VLC",
+  "layout" : {
+    "step backward" : "icon-step-backward",
+    "step forward" : "icon-step-forward",
+    "play" : "icon-play",
+    "stop" : "icon-stop",
+    "volumeDown" : "icon-volume-down",
+    "volumeUp" : "icon-volume-up",
+    "fullscreen" : "icon-fullscreen"
+  }
+}

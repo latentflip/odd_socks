@@ -1,0 +1,47 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'child-process' ]
+2 info using npm@1.1.50
+3 info using node@v0.8.4
+4 verbose node symlink /usr/local/bin/node
+5 verbose read json /Users/latentflip/Projects/odd_socks/package.json
+6 verbose read json /Users/latentflip/Projects/odd_socks/node_modules/express/package.json
+7 verbose read json /Users/latentflip/Projects/odd_socks/node_modules/socket.io/package.json
+8 verbose read json /Users/latentflip/Projects/odd_socks/package.json
+9 verbose cache add [ 'child-process', null ]
+10 silly cache add name=undefined spec="child-process" args=["child-process",null]
+11 verbose parsed url { pathname: 'child-process',
+11 verbose parsed url   path: 'child-process',
+11 verbose parsed url   href: 'child-process' }
+12 silly lockFile f28a07a6-child-process child-process
+13 verbose lock child-process /Users/latentflip/.npm/f28a07a6-child-process.lock
+14 silly lockFile f28a07a6-child-process child-process
+15 verbose addNamed [ 'child-process', '' ]
+16 verbose addNamed [ null, '' ]
+17 silly lockFile b9aadc1f-child-process child-process@
+18 verbose lock child-process@ /Users/latentflip/.npm/b9aadc1f-child-process.lock
+19 silly addNameRange { name: 'child-process', range: '', hasData: false }
+20 verbose url raw child-process
+21 verbose url resolving [ 'https://registry.npmjs.org/', './child-process' ]
+22 verbose url resolved https://registry.npmjs.org/child-process
+23 info retry registry request attempt 1 at 19:30:17
+24 http GET https://registry.npmjs.org/child-process
+25 http 404 https://registry.npmjs.org/child-process
+26 silly registry.get cb [ 404,
+26 silly registry.get   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+26 silly registry.get     date: 'Thu, 15 Nov 2012 19:29:57 GMT',
+26 silly registry.get     'content-type': 'application/json',
+26 silly registry.get     'content-length': '52',
+26 silly registry.get     'cache-control': 'must-revalidate' } ]
+27 silly lockFile b9aadc1f-child-process child-process@
+28 error 404 'child-process' is not in the npm registry.
+28 error 404 You should bug the author to publish it
+28 error 404
+28 error 404 Note that you can also install from a
+28 error 404 tarball, folder, or http url, or git url.
+29 error System Darwin 12.1.0
+30 error command "node" "/usr/local/bin/npm" "install" "child-process"
+31 error cwd /Users/latentflip/Projects/odd_socks
+32 error node -v v0.8.4
+33 error npm -v 1.1.50
+34 error code E404
+35 verbose exit [ 1, true ]

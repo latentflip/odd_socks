@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+/*
+var colors = {
+  black : '#111111',
+  blue : '#00AEDB',
+  green : '#00B159',
+  orange : '#F37735',
+  pink : '#EC098C',
+  purple : '#7C4199',
+  red : '#D11141',
+  yellow : '#FFC425'
+};
+*/
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+#select-app {
+  overflow-y: hidden;
+}
+
+#select-app select {
+  width: 60%;
+  margin-left: 20%;
+  height: 40px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-size: 30px;
+}
+#layout {
+  width: 100%;
+}
+.btn {
+  display: inline-block;
+  text-align: center;
+  background : #00AEDB;
+  line-height: 0;
+  color: white;
+  text-decoration: none;
+}
