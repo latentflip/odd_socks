@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=2, maximum-scale=1">
+    <script src="/socks.js"></script>
+    <script src="/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <a href='#' rel="trigger:remote-next">next</a>
+
+    <script>
+      $(function() {
+        $('a[rel^="trigger:"]').click(function() {
+          var rel = $(this).attr('rel').split(':')[1];
+          var parts = rel.split('-');
+          var from = parts[0];
+          var ev = parts[1];
+
+          oddSocket.emit(from, {event: ev});
+
+          return false;
+        });
+      });
+    </script>
+
+  </body>
+</html>
