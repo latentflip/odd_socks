@@ -15,7 +15,7 @@
   };
 
   onLoad = function(io) {
-    var connection = io.connect('//'+document.location.hostname+':9999');
+    var connection = io.connect('//'+document.location.host);
     return oddSocket.setConnection(connection);
   };
 
@@ -26,6 +26,7 @@
   } else {
     var s = document.createElement('script')
     var onLoad;
+    window.oddSocket = oddSocket;
 
     s.type = 'text/javascript'
     s.onload = function() {

@@ -1,22 +1,132 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=2, maximum-scale=1">
+    <link rel='stylesheet' type='text/css' href='font-awesome.css' />
+    <link rel='stylesheet' type='text/css' href='remote.css' />
     <script src="/socks.js"></script>
-    <script src="/jquery.min.js"></script>
+    <script src="/zepto.js"></script>
   </head>
 
   <body>
-    <a href='#' rel="trigger:remote-next">next</a>
+    <div id='select-app'>
+      <select name='app'></select>
+    </div>
+
+    <div id='layout'>
+    </div>
 
     <script>
+      document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
       $(function() {
-        $('a[rel^="trigger:"]').click(function() {
+        var currentApp = function() {
+          return $('select').val();
+        }
+
+        $.getJSON('/apps', function(apps) {
+          var selectHTML = '';
+          apps.forEach(function(app) {
+            selectHTML += '<option value="'+app+'">'+app+'</option>';
+          });
+          $('select[name="app"]').html(selectHTML);
+          $('select[name="app"]').trigger('change');
+        });
+
+
+        window.loadLayout = function(app) {
+          $.getJSON('/app?app='+app, function(data) {
+            var layout = data.layout;
+            $('#layout').html('');
+            for(var command in layout) {
+              var $btn = $('<a>');
+              $btn
+                .attr('href', '#')
+                .addClass('btn')
+                .addClass(layout[command])
+                .attr('rel', 'trigger:remote-'+command)
+              $('#layout').append($btn);
+            }
+            doLayout();
+          });
+        }
+
+        var slideUp = function() {
+          $('#select-app').animate({height: 0}, 200);
+        }
+
+        $('#layout').on('swipeUp', slideUp);
+
+        var slideDown = function() {
+          $('#select-app').animate({height: 65}, 200);
+        }
+        $('#layout').on('swipeDown', slideDown);
+
+        var selectHeight;
+        var doLayout = function() {
+          $('#select-app').css({height: 0});
+          var elCount = $('#layout .btn').length,
+              vp = {height: $(window).height(), width: $(window).width()},
+              selectHeight = $('#select-app').height(),
+              $layout = $('#layout'),
+              $btns = $('#layout .btn'),
+              cols, rows, leftover;
+
+          if (elCount<=3) {
+            cols = 1;
+          } else if (elCount <= 6) {
+            cols = 2;
+          } else {
+            cols = 3;
+          }
+
+          rows = Math.ceil(elCount/cols);
+          var layoutWidth = vp.width;
+          var layoutHeight = vp.height - selectHeight;
+            
+          var squareSizeW = layoutWidth/cols;
+          var squareSizeH = layoutHeight/rows;
+
+          var spacing = 10;
+          if (squareSizeW < squareSizeH) {
+            var squareSize = squareSizeW - spacing*(cols-1);
+          } else {
+            var squareSize = squareSizeH - spacing*(rows-1);
+          }
+
+        
+          if (cols > 1) {
+            $btns.css({marginLeft: spacing});
+          }
+          leftover = (layoutWidth - cols*squareSize);
+          $layout.css({paddingLeft: leftover/2 - spacing*(cols-1)});
+
+          leftover = (layoutHeight - rows*squareSize);
+          $btns.css({marginTop: spacing});
+          $layout.css({paddingTop: leftover/2 - spacing*(rows-1)});
+
+
+          $layout.width(layoutWidth);
+          $btns
+              .width(squareSize)
+              .height(squareSize)
+              .css({
+                lineHeight: squareSize+'px',
+                fontSize: (squareSize/3)+'px'
+              })
+        }
+
+        $('select[name="app"]').change(function() {
+          loadLayout($(this).val());
+        });
+
+
+        $('a[rel^="trigger:"]').live('click', function() {
           var rel = $(this).attr('rel').split(':')[1];
           var parts = rel.split('-');
           var from = parts[0];
           var ev = parts[1];
 
-          oddSocket.emit(from, {event: ev});
+          console.log('emit', currentApp(), ev);
+          oddSocket.emit(from, {app: currentApp(), event: ev});
 
           return false;
         });

@@ -1,9 +1,48 @@
-<script src="http://localhost:9999/socket.io/socket.io.js"></script>
-<script>
-  var socket = io.connect('http://localhost:9999');
-  socket.on('news', function (data) {
-    alert(data);
-    socket.emit('my other event', { my: 'data' });
-  });
+<html>
+  <head>
+    <script src="/socks.js"></script>
+    <script src="/jquery.min.js"></script>
+    <script>
+      var details = {};
+      
+      var setDetails = function() { 
+        $('span[data-yield]').each(function(i,el) {
+          var attr = $(el).attr('data-yield');
+          var val = details[attr];
+          $(el).text( val )
+        });
 
-</script>
+        $('*[data-attr-tmpl]').each(function() {
+          var $el = $(this);
+          var tmpl = $el.attr('data-attr-tmpl').split('=');
+          var attr = tmpl[0];
+          
+        });
+      };
+
+      oddSocket.on('welcome', function(data) {
+        for(var key in data) {
+          details[key] = data[key];
+          console.log(details);
+        };
+        setDetails();
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>Access remote at: 
+      <a data-attr-tmpl="href=http://{{ip}}:{{port}}">
+        <span data-yield='ip'></span>:<span data-yield='port'></span>
+      </a>  
+    </h1>
+  
+    <script>
+      $(function() {
+        setDetails();
+      });
+    </script>
+  </body>
+</html>
+
+
