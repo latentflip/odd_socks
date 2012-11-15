@@ -1,8 +1,8 @@
 {
   "app": "System",
   "commands" : {
-    "volumeUp" : "~/remotes/system/volume-up", 
-    "volumeDown" : "~/remotes/system/volume-down"
+    "volumeUp" : "./system/volume-up", 
+    "volumeDown" : "./system/volume-down"
   },
   "layout" : {
     "volumeUp" : "icon-volume-up",

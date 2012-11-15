@@ -3,7 +3,7 @@ var express = require('express')
   , http = require('http')
   , server = http.createServer(app)
   , io = require('socket.io').listen(server)
-  , port = '9999'
+  , port = process.argv[2] || '9999'
   , fs = require('fs')
   , exec = require('child_process').exec
   ;
@@ -55,7 +55,7 @@ var myIp = function() {
 };
 
 var getApps = function() {
-  var appsDir = process.env.HOME+'/remotes'
+  var appsDir = __dirname+'/remotes'
   var files = fs.readdirSync(appsDir);
   files = files.filter(function(f) {
     return !fs.statSync(appsDir+'/'+f).isDirectory();
@@ -71,7 +71,7 @@ app.get('/apps', function(req, res) {
 });
 
 app.get('/app', function(req, res) {
-  var file = process.env.HOME+'/remotes/'+req.query['app']+'.json';
+  var file = __dirname+'/remotes/'+req.query['app']+'.json';
   delete require.cache[file];
   var config = require(file);
   res.send(config);
@@ -79,14 +79,14 @@ app.get('/app', function(req, res) {
 
 var appExec = function(app, command) {
   console.log(app, command);
-  var config = require(process.env.HOME+'/remotes/'+app+'.json');
+  var config = require(__dirname+'/remotes/'+app+'.json');
 
   if (!config.commands) {
     exec("osascript -e 'tell application \""+config.app+"\" to "+command+"'")
   } else {
     var cmd = config.commands[command];
-    cmd = cmd.replace(/^~/, process.env.HOME);
-    exec(config.commands[command])
+    cmd = cmd.replace(/^./, __dirname+'/remotes/');
+    exec(cmd)
   }
 };
 
@@ -98,7 +98,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('remote', function (data) {
-    if (data.app == 'browser') {
+    if (data.app == 'Browser') {
       socket.broadcast.emit('remote', data);
     } else {
       appExec(data.app, data.event);
