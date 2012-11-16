@@ -98,6 +98,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('remote', function (data) {
+    console.log('Received remote', data);
     if (data.app == 'Browser') {
       socket.broadcast.emit('remote', data);
     } else {

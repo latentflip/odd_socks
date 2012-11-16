@@ -1,0 +1,15 @@
+{
+  "app": "System",
+  "commands" : {
+    "upArrow" : "./system/keystroke 126", 
+    "downArrow" : "./system/keystroke 125",
+    "leftArrow" : "./system/keystroke 123",
+    "rightArrow" : "./system/keystroke 124"
+  },
+  "layout" : {
+    "upArrow" : "icon-arrow-up",
+    "downArrow" : "icon-arrow-down",
+    "leftArrow" : "icon-arrow-left",
+    "rightArrow" : "icon-arrow-right"
+  }
+}
