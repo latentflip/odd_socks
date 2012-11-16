@@ -1,0 +1,9 @@
+{
+  "app": "Spotify",
+  "layout" : {
+    "play" : "icon-play",
+    "pause" : "icon-pause",
+    "previous track" : "icon-step-backward",
+    "next track" : "icon-step-forward"
+  }
+}
