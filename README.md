@@ -14,3 +14,4 @@ More coming soon.
 ## Screens
 
 ![Screenshot1](https://raw.github.com/latentflip/odd_socks/master/docs/screen1.png)
+![Screenshot2](https://raw.github.com/latentflip/odd_socks/master/docs/screen2.png)
